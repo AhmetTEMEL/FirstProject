@@ -1,13 +1,13 @@
 package com.Dev.FirstProject.business;
 
 import com.Dev.FirstProject.Entities.User;
-import com.Dev.FirstProject.dataAccess.HibernateUserDao;
 import com.Dev.FirstProject.dataAccess.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserManager implements UserService{
@@ -22,32 +22,31 @@ public class UserManager implements UserService{
     @Override
     @Transactional
     public List<User> getListOfUsers() {
-        return userDao.getListOfUsers();
+        return userDao.findAll();
     }
 
     @Override
     @Transactional
     public void add(User user) {
-        userDao.add(user);
+        userDao.save(user);
     }
 
     @Override
     @Transactional
-    public void update(User user) {
-        userDao.update(user);
-
+    public void update(User user,int id) {
+        User userToUpdate = new User(id,user.getName(),user.getSurname(),user.getRegisterDate());
+        userDao.save(userToUpdate);
     }
 
     @Override
     @Transactional
-    public void delete(User user) {
-        userDao.delete(user);
-
+    public void delete(int id) {
+        userDao.deleteById(id);
     }
 
     @Override
     @Transactional
-    public User getUserById(int id) {
-        return userDao.getUserById(id);
+    public Optional<User> getUserById(int id) {
+        return userDao.findById(id);
     }
 }

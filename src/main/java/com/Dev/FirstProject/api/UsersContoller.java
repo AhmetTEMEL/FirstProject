@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UsersContoller {
     private UserService userService;
 
@@ -17,7 +17,7 @@ public class UsersContoller {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/getall")
     public List<User> get(){
         return userService.getListOfUsers();
     }
@@ -27,16 +27,16 @@ public class UsersContoller {
         userService.add(user);
     }
 
-    @PostMapping("/update")
-    public void update(@RequestBody User user){
-        userService.update(user);
+    @PutMapping("/update/{id}")
+    public void update(@RequestBody User user,@PathVariable int id){
+        userService.update(user,id);
     }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody User user){
-        userService.delete(user);
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable int id){
+        this.userService.delete(id);
     }
-    @GetMapping("/users/{id}")
+    @GetMapping("/get/{id}")
     public void getById(@PathVariable int id){
         userService.getUserById(id);
     }

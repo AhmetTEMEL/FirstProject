@@ -1,10 +1,17 @@
 package com.Dev.FirstProject.Entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -19,44 +26,6 @@ public class User {
     private String surname;
 
     @Column(name = "registerdate")
-    private Date registerDate;
-
-    public User(int id, String name, String surname, Date registerDate) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.registerDate = registerDate;
-    }
-    public User(){
-
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Date getRegisterDate() {
-        return registerDate;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String registerDate;
 
 }

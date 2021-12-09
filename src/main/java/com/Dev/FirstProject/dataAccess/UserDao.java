@@ -1,15 +1,8 @@
 package com.Dev.FirstProject.dataAccess;
 
 import com.Dev.FirstProject.Entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface UserDao {
-
-    List<User> getListOfUsers();
-    void add(User user);
-    void update(User user);
-    void delete(User user);
-    User getUserById(int id);
+public interface UserDao extends JpaRepository<User,Integer> {
 
 }
