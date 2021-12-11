@@ -1,11 +1,13 @@
 package com.Dev.FirstProject.api;
 
 import com.Dev.FirstProject.Entities.User;
+import com.Dev.FirstProject.Entities.dtos.GetUserDto;
 import com.Dev.FirstProject.business.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -18,8 +20,8 @@ public class UsersContoller {
     }
 
     @GetMapping("/getall")
-    public List<User> get(){
-        return userService.getListOfUsers();
+    public List<GetUserDto> get(){
+        return userService.getAllUsers();
     }
 
     @PostMapping("/add")
@@ -37,7 +39,7 @@ public class UsersContoller {
         this.userService.delete(id);
     }
     @GetMapping("/get/{id}")
-    public void getById(@PathVariable int id){
-        userService.getUserById(id);
+    public Optional<GetUserDto> getById(@PathVariable int id){
+       return userService.getUserById(id);
     }
 }

@@ -28,4 +28,10 @@ public class User {
     @Column(name = "registerdate")
     private String registerDate;
 
+    @Column(name="password")
+    private String password;
+
+    @Column(name="email")
+    private String email;
+
 }

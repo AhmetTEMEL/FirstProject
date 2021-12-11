@@ -1,6 +1,7 @@
 package com.Dev.FirstProject.business;
 
 import com.Dev.FirstProject.Entities.User;
+import com.Dev.FirstProject.Entities.dtos.GetUserDto;
 import com.Dev.FirstProject.dataAccess.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,6 @@ public class UserManager implements UserService{
 
     @Override
     @Transactional
-    public List<User> getListOfUsers() {
-        return userDao.findAll();
-    }
-
-    @Override
-    @Transactional
     public void add(User user) {
         userDao.save(user);
     }
@@ -34,7 +29,8 @@ public class UserManager implements UserService{
     @Override
     @Transactional
     public void update(User user,int id) {
-        User userToUpdate = new User(id,user.getName(),user.getSurname(),user.getRegisterDate());
+        User userToUpdate = new User(id,user.getName(),user.getSurname(),
+                user.getRegisterDate(),user.getPassword(),user.getEmail());
         userDao.save(userToUpdate);
     }
 
@@ -45,8 +41,12 @@ public class UserManager implements UserService{
     }
 
     @Override
-    @Transactional
-    public Optional<User> getUserById(int id) {
-        return userDao.findById(id);
+    public Optional<GetUserDto> getUserById(int id) {
+        return this.userDao.findById(id);
+    }
+
+    @Override
+    public List<GetUserDto> getAllUsers() {
+        return this.userDao.getAllUsers();
     }
 }
