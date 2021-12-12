@@ -10,7 +10,6 @@ public interface UserService {
     void add(User user);
     void update(User user,int id);
     void delete(int id);
-    //Optional<User> getUserById(int id);
     Optional<GetUserDto> getUserById(int id);
     List<GetUserDto> getAllUsers();
 }
